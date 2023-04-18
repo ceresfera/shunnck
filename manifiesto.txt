@@ -3,7 +3,7 @@ Manifiesto Cero.
 
 Hola, soy Emmanuel.
 
-    Nací en Puerto Rico, en una ciudad llamada Manatí. Quizá
+    Nací en Puerto Rico, en una ciudad llamada Manatí. Quizás
 te preguntes, ¿A qué viene todo esto? No te quiero quitar más
 de tu tiempo. Es valioso. Por ello te entiendo si quieres saltar
 este contexto. De igual manera, quiero poder explicarte el
@@ -39,6 +39,7 @@ crear este proyecto.
 🍁 Yen Reveration
 🎋 jpl.
 🫧 California Street
+👨🏻‍✈️ ElGobiernito
 🌊 Jonathan A.
 🍂 Gabriel A.
 🌾 Vicente
