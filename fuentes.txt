@@ -1,0 +1,10 @@
+fonts:
+    - family: Hepta Slab
+      fonts:
+        - asset: assets/fonts/HeptaSlab-VariableFont_wght.ttf
+    - family: LeaugeSpartan
+      fonts:
+        - asset: assets/fonts/LeagueSpartan-Bold.ttf
+    - family: LeaugeSpartanLite
+      fonts:
+        - asset: assets/fonts/LeagueSpartan-Regular.ttf

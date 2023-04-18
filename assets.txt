@@ -1,0 +1,27 @@
+assets:
+  - assets/icons/r1-1.gif
+  - assets/images/IMG-20230221-WA0025.jpg
+  - assets/images/kz2tT0n6cVFZiBsgy6.gif
+  - assets/images/icono_ponce.png
+  - assets/images/imagotipo_ponce.png
+  - assets/images/ajustes_banner.png
+  - assets/images/seguridad_banner.png
+  - assets/images/amigos_banner.png
+  - assets/images/notificaciones_banner.png
+  - assets/images/region_banner.png
+  - assets/images/acceder_banner.png
+  - assets/images/primer_instante_banner.png
+  - assets/images/here_banner.png
+  - assets/images/general_banner.png
+  - assets/images/info_banner.png
+  - assets/images/ints_play_mayaguez.png
+  - assets/images/imagotipo_ints_play.png
+  - assets/images/icono_ints_central.png
+  - assets/images/Google_ G _Logo 1.png
+  - assets/images/github-mark 1.png
+  - assets/images/Apple_logo_dark_grey 1.png
+  - assets/images/inicio_sesion.png
+  - assets/images/NuevoUsuario.png
+  - assets/images/estrellas_inicio.png
+  - assets/images/Imagen-Clave.png
+  - assets/images/icono_nybox_central.png
