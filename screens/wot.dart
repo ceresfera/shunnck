@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'ajustes.dart';
 import 'nybox.dart';
 import 'instante.dart';
-import 'nyboxview.dart';
 
 class WotScreen extends StatefulWidget {
   const WotScreen({Key? key}) : super(key: key);
@@ -28,6 +28,14 @@ class _WotScreenState extends State<WotScreen> {
                   builder: (context) => const NyboxView(
                     url: '',
                   ),
+                ),
+              );
+            },
+            onLongPress: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ajustesScreen(),
                 ),
               );
             },

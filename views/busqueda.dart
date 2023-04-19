@@ -1,6 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:ints_play/screens/wot.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'wot.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:share/share.dart';
 
@@ -14,47 +16,19 @@ class BusquedaView extends StatefulWidget {
 }
 
 class _BusquedaViewState extends State<BusquedaView> {
-  late final WebViewController controller;
-  var loadingPercentage = 0;
-  var currentUrl = '';
-
-  getCurrentUrl() async {
-    var currentUrl = await controller.currentUrl();
-    debugPrint("Current URL: $currentUrl");
+  void copyToClipboard(String text) {
+    Clipboard.setData(ClipboardData(text: text));
   }
 
-  @override
-  void initState() {
-    super.initState();
-    controller = WebViewController()
-      ..setNavigationDelegate(NavigationDelegate(
-        onPageStarted: (url) {
-          setState(() {
-            loadingPercentage = 0;
-            currentUrl = url;
-          });
-          debugPrint('url: $url');
-        },
-        onProgress: (progress) {
-          setState(() {
-            loadingPercentage = progress;
-          });
-        },
-        onPageFinished: (url) {
-          setState(() {
-            loadingPercentage = 100;
-          });
-        },
-      ));
-    controller.loadRequest(
-      Uri.parse(widget.url),
-    );
-  }
+  late InAppWebViewController _webViewController;
+  late String _currentUrl;
+
+  final adUrlFilters =
+      ".*.doubleclick.net/.*, .*ads.pubmatic.com/.*, .*googlesyndication.com/.*, .*google-analytics.com/.*, .*adservice.google.*/.*, .*adbrite.com/.*, .*exponential.com/.*, .*quantserve.com/.*, .*scorecardresearch.com/.*, .*zedo.com/.*, .*adsafeprotected.com/.*, .*teads.tv/.*, .*outbrain.com/.*";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 30, 30, 30),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 30, 30, 30),
         title: Center(
@@ -75,9 +49,38 @@ class _BusquedaViewState extends State<BusquedaView> {
         ),
         elevation: 0,
       ),
-      body: WebViewWidget(
-        controller: controller,
-        layoutDirection: TextDirection.ltr,
+      body: Stack(
+        children: [
+          InAppWebView(
+            initialUrlRequest: URLRequest(url: Uri.parse(widget.url)),
+            initialOptions: InAppWebViewGroupOptions(
+              crossPlatform: InAppWebViewOptions(
+                  preferredContentMode: UserPreferredContentMode.MOBILE,
+                  javaScriptEnabled: true,
+                  contentBlockers: [
+                    ContentBlocker(
+                        trigger: ContentBlockerTrigger(
+                          urlFilter: adUrlFilters,
+                        ),
+                        action: ContentBlockerAction(
+                            type: ContentBlockerActionType.CSS_DISPLAY_NONE,
+                            selector:
+                                '.notification, .media, #developer-story'))
+                  ]),
+            ),
+            onWebViewCreated: (controller) {
+              _webViewController = controller;
+            },
+            onLoadStart: (controller, url) {
+              setState(() {});
+            },
+            onLoadStop: (controller, url) {
+              setState(() {
+                _currentUrl = url.toString();
+              });
+            },
+          ),
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
@@ -90,28 +93,27 @@ class _BusquedaViewState extends State<BusquedaView> {
               icon: const Icon(Icons.arrow_back_rounded,
                   color: Color(0XFFF8F8F8)),
               onPressed: () {
-                controller.goBack();
+                _webViewController.goBack();
               },
             ),
             IconButton(
               icon: const Icon(Icons.arrow_forward_rounded,
                   color: Color(0XFFF8F8F8)),
               onPressed: () {
-                controller.goForward();
+                _webViewController.goForward();
               },
             ),
             IconButton(
               icon: const Icon(Icons.change_circle_rounded,
                   color: Color(0XFFF8F8F8)),
               onPressed: () {
-                controller.reload();
+                _webViewController.reload();
               },
             ),
             IconButton(
               icon: const Icon(Icons.pending_rounded, color: Color(0XFFF8F8F8)),
               onPressed: () async {
-                final url = await controller.currentUrl();
-                Share.share(url!);
+                await Share.share(_currentUrl);
               },
             ),
           ],

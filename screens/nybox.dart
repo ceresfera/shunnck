@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nyboxview.dart';
+import 'wot.dart';
+import 'nyboxview.dart';
 
 class NyboxView extends StatefulWidget {
   const NyboxView({Key? key, required String url}) : super(key: key);
@@ -16,9 +17,17 @@ class _NyboxViewState extends State<NyboxView> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 30, 30, 30),
         title: Center(
-          child: Image.asset(
-            "assets/images/icono_nybox_central.png",
-            height: 38,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const WotScreen()),
+              );
+            },
+            child: Image.asset(
+              "assets/images/icono_nybox_central.png",
+              height: 36,
+            ),
           ),
         ),
         elevation: 0,

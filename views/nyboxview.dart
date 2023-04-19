@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'busqueda.dart';
 import 'instant.dart';
 
 class NyBoxPlasma extends StatefulWidget {
@@ -41,7 +40,7 @@ class _NyBoxPlasmaState extends State<NyBoxPlasma> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: const Color(0XFF171717),
-                    hintText: 'Busca aquí.',
+                    hintText: 'Shhh...',
                     hintStyle: const TextStyle(
                       color: Color(0XFFCACACA),
                       fontSize: 50,
@@ -66,16 +65,18 @@ class _NyBoxPlasmaState extends State<NyBoxPlasma> {
                   onSubmitted: (String userInput) {
                     // Check if the user input is a valid URL
                     if (Uri.tryParse(userInput)?.hasScheme ?? false) {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BusquedaView(url: userInput),
+                          builder: (context) => const InstantView(
+                            url: '',
+                          ),
                         ),
                       );
                     } else {
                       // If the user input is not a valid URL, perform a DuckDuckGo search
                       final searchQuery = Uri.encodeComponent(userInput);
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => InstantView(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'instant.dart';
 import 'busqueda.dart';
 
 class InstanteViews extends StatefulWidget {
@@ -71,7 +72,7 @@ class _InstanteViewsState extends State<InstanteViews> {
                   onSubmitted: (String userInput) {
                     // Check if the user input is a valid URL
                     if (Uri.tryParse(userInput)?.hasScheme ?? false) {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => BusquedaView(url: userInput),
